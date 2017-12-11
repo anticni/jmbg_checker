@@ -1,6 +1,6 @@
 const jmbg = document.getElementById("jmbg"); 
 
-function check(){
+function parseJMBG(){
 
 	var str = jmbg.value;
 	var	dd = str.slice(0,2),
@@ -114,6 +114,25 @@ var sexP = document.createElement("p");
 sexP.textContent = sex;
 document.getElementById("data").appendChild(sexP);
 
+
+}
+
+function check(){
+		let control = document.getElementById("jmbg").value.split("");
+
+		if(jmbg.value.length === 13){
+			ControlNr = 11 - (7 * (Number(control[0]) + Number(control[6])) + 6 * (Number(control[1]) + Number(control[7])) + 5 * (Number(control[2]) + Number(control[8])) + 4 * (Number(control[3]) + Number(control[9])) + 3 * (Number(control[4]) + Number(control[10])) + 2 * (Number(control[5]) + Number(control[11]))) % 11;
+			if (ControlNr > 9) ControlNr = 0;
+		if (Number(control[12]) == ControlNr){
+			parseJMBG();
+		}
+		else{
+			console.log("nije ispravan kontrolni");
+		}
+	}
+	else{
+		console.log("nema 13 brojeva")
+	}
 
 
 
