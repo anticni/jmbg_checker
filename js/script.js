@@ -27,11 +27,18 @@ var monthP = document.createElement("p");
 monthP.textContent = month;
 document.getElementById("data").appendChild(monthP);
 
-var year = "Godina rodjenja: 1" + yyy +".";
+if (yyy.startsWith("0")){
+	var year = "Godina rodjenja: " + "2" + yyy;
+}
+else{
+var year = "Godina rodjenja: " + "1" + yyy;
+}
 var yearP = document.createElement("p");
 yearP.textContent = year;
 document.getElementById("data").appendChild(yearP);
 
+var date = new Date(Number(year), Number(month), Number(dd));
+debugger;
 var region = "Regija:" + rr
 
 switch (Number(rr)){
@@ -101,7 +108,7 @@ case 95	: region =	 "Prizren  (Prizrenski okrug	 Gora-Dragaš, Orahovac, Prizren
 case 96	: region =	 "Kosovsko Pomoravski okrug	 (Gnjilane, Kosovska Kamenica, Vitina, Novo Brdo)";  break;		
 }
 var regionP = document.createElement("p");
-regionP.textContent = region;
+regionP.textContent = "regija: " + region;
 document.getElementById("data").appendChild(regionP);
 
 if (Number(bbb)<500){
@@ -118,9 +125,12 @@ document.getElementById("data").appendChild(sexP);
 }
 
 function check(){
+		document.getElementById("data").innerHTML = "";
 		let control = document.getElementById("jmbg").value.split("");
 
+//check JMBG length
 		if(jmbg.value.length === 13){
+//check control number
 			ControlNr = 11 - (7 * (Number(control[0]) + Number(control[6])) + 6 * (Number(control[1]) + Number(control[7])) + 5 * (Number(control[2]) + Number(control[8])) + 4 * (Number(control[3]) + Number(control[9])) + 3 * (Number(control[4]) + Number(control[10])) + 2 * (Number(control[5]) + Number(control[11]))) % 11;
 			if (ControlNr > 9) ControlNr = 0;
 		if (Number(control[12]) == ControlNr){
@@ -134,7 +144,50 @@ function check(){
 		console.log("nema 13 brojeva")
 	}
 
-
-
-
 }
+
+// VALIDATES DATE, NOT NEEDED
+
+// function check(){
+// 	var str = jmbg.value;
+// 	var	dd = Number(str.slice(0,2)),
+// 		mm = Number(str.slice(2,4)),
+// 		yyy = Number(str.slice(4,7)),
+// 		rr = Number(str.slice(7,9)),
+// 		bbb = Number(str.slice(9,12)),
+// 		k = Number(str.slice(12,13));
+
+// 	if (mm>12){
+// 		console.log("month not good");
+// 		return;
+// 	}
+// 	var ListofDays = [31,28,31,30,31,30,31,31,30,31,30,31];  
+  
+//   if (mm==1 || mm>2){  
+//   if (dd>ListofDays[mm-1]){  
+//   alert('Invalid date format!');  
+//   return false;  
+//   }  
+//   }  
+//   if (mm==2){  
+//   var lyear = false;  
+//   if ( (!(yyy % 4) && yyy % 100) || !(yyy % 400)){  
+//   lyear = true;  
+//   }  
+//   if ((lyear==false) && (dd>=29)){  
+//   alert('Invalid date format!');  
+//   return false;
+//   }  
+//   if ((lyear==true) && (dd>29)){  
+//   alert('Invalid date format!');  
+//   return false;  
+//   }  
+    
+//   }  
+//   else  
+//   {  
+//   alert("VALID!");  
+
+//   return false;  
+//   }  
+// }
